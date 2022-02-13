@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+model User {
+  id                String             @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  username          String
+  current_puzzle    Int                @default(1)
+  puzzleSubmissions PuzzleSubmission[]
+}
+
+model PuzzleSubmission {
+  id          String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  user        User   @relation(fields: [userId], references: [id])
+  word        String
+  numAttempts Int
+  attempts    Json
+
+  userId String @db.ObjectId
+}
+
+model Puzzle {
+  id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  number Int
+  word   String
+}

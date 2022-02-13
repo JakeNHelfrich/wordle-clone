@@ -1,0 +1,31 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        height: 50px;
+        font-size: 24px;
+        width: 250px;
+        margin: 24px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        background-color: #6aaa64;
+        border: none;
+        width: 100px;
+        height: 50px;
+
+        &:focus {
+            filter: brightness(0.6);
+        }
+    }
+
+    .error {
+        color: #f5793a;
+    }
+}
